@@ -21,7 +21,7 @@ public sealed class ProductService
     {
         try
         {
-            var result = await _productRepository.GetItemsAsync(searchParams, cancellationToken);
+            var result = await _productRepository.GetItemsAsync(searchParams, cancellationToken).ConfigureAwait(false);
 
             return (result.Results.MapListOfProducts(), result.TotalCount, result.PageCount);
         }

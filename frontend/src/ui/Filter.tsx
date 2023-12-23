@@ -18,8 +18,8 @@ export const Filter = ({ filterField, options }) => {
         <FilterButton
           key={option.value}
           onClick={() => handleClick(option.value)}
-          active={option.value === currentFilter}
           disabled={option.value === currentFilter}
+          $isActive={option.value === currentFilter}
         >
           {option.label}
         </FilterButton>
@@ -38,9 +38,17 @@ const StyledFilter = styled.div`
   gap: 0.4rem;
 `;
 
-const FilterButton = styled.button`
+const FilterButton = styled.button<{ $isActive: boolean }>`
   background-color: var(--color-grey-0);
   border: none;
+
+  ${({ $isActive }) =>
+    $isActive &&
+    css`
+      background-color: var(--color-brand-600);
+      color: var(--color-brand-50);
+    `}
+
   border-radius: var(--border-radius-sm);
   font-weight: 500;
   font-size: 1.4rem;

@@ -10,7 +10,7 @@ public sealed class SearchParams
     public int PageNumber { get; set; } = 1;
 
     [Range(1, 100, ErrorMessage = "The Page Number has to be between 1 and 100")]
-    public int PageSize { get; set; } = 4;
+    public int PageSize { get; set; } = 50;
 
     public string OrderBy { get; set; } = string.Empty;
 

@@ -17,10 +17,10 @@ public sealed class ProductRepositoryMongoDriver : IProductRepository
         if (!cosmosDbService.CollectionExistsAsync(CollectionName).Result)
         {
             logger.LogInformation($"{CollectionName} collection does not exist. Creating it");
+            // TODO: Adding missing collection
         }
 
         _productCollection = cosmosDbService.GetMongoDatabase().GetCollection<Product>(CollectionName);
-        logger.LogInformation("Connected to Collection {0}", CollectionName);
     }
 
     public async Task<(IReadOnlyCollection<Product> Results, long TotalCount, int PageCount)> GetItemsAsync(SearchParams searchParams, CancellationToken cancellationToken = default)

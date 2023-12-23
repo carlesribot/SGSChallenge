@@ -18,7 +18,7 @@ public static class ProductMapper
             Category = product.Category,
             Name = product.Name,
             Description = product.Description,
-            Id = product.ProductId,
+            Id = product.Id.ToString(),
             ImageUrl = product.Picture,
             IsActive = product.IsActive,
             Price = product.Price,

@@ -2,17 +2,20 @@ import { Outlet } from "react-router-dom";
 import { Header } from "./Header";
 
 import styled from "styled-components";
+import { ProductsProvider } from "../features/products/ProductsProvider";
 
 export const AppLayout = () => {
   return (
-    <StyleAppLayout>
-      <Header />
-      <Main>
-        <Container>
-          <Outlet />
-        </Container>
-      </Main>
-    </StyleAppLayout>
+    <ProductsProvider>
+      <StyleAppLayout>
+        <Header />
+        <Main>
+          <Container>
+            <Outlet />
+          </Container>
+        </Main>
+      </StyleAppLayout>
+    </ProductsProvider>
   );
 };
 

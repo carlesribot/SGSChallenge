@@ -20,9 +20,10 @@ export const ProductCard: React.FC<Product> = ({ product }: Props) => {
     <CardContainer>
       <ProductImage src={product.imageUrl} alt={product.name} />
       <ProductName>{product.name}</ProductName>
-      <ProductName>{product.description}</ProductName>
-      <ProductName>{product.category}</ProductName>
-      <ProductPrice>${product.price}</ProductPrice>
+      <ProductStatus>{product.description}</ProductStatus>
+      <ProductDescription>Category: {product.category}</ProductDescription>
+      <ProductDetails>Price: {product.price}€</ProductDetails>
+      <ProductDetails>Stock: {product.stock}</ProductDetails>
       <ProductStatus>{product.isActive ? "Active" : "Inactive"}</ProductStatus>
     </CardContainer>
   );
@@ -46,10 +47,14 @@ const ProductName = styled.h3`
   font-size: 16px;
 `;
 
-const ProductPrice = styled.p`
+const ProductDescription = styled.h4`
   margin-top: 8px;
   font-size: 14px;
-  color: #888;
+`;
+
+const ProductDetails = styled.h5`
+  margin-top: 8px;
+  font-size: 14px;
 `;
 
 const ProductStatus = styled.p`
