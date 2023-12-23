@@ -1,0 +1,16 @@
+﻿{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "Host": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "http://localhost:5001",
+        "environmentVariables": {
+            "ASPNETCORE_ENVIRONMENT": "Development",
+            //"MongoDB__Database": "Products",
+            //"MongoDB__ConnectionString": "mongodb://root:Password1234%21@localhost:27017/?authSource=admin&readPreference=primary&ssl=false&directConnection=true"
+        }
+    }
+  }
+}
