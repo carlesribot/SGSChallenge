@@ -1,10 +1,11 @@
-﻿using MongoDB.Entities;
+﻿using Infrastructure.Interfaces;
+using MongoDB.Entities;
 
 namespace Infrastructure.MongoDB.Products;
 
 public sealed class ProductRepository : IProductRepository
 {
-    public async Task<(IReadOnlyCollection<Product> Results, long TotalCount, int PageCount)> GetItemsAsync(
+    public async Task<(IReadOnlyCollection<MongoDBDriver.Products.Product> Results, long TotalCount, int PageCount)> GetItemsAsync(
         SearchParams searchParams, CancellationToken cancellationToken)
     {
         var query = DB.PagedSearch<Product, Product>();
@@ -40,7 +41,8 @@ public sealed class ProductRepository : IProductRepository
 
         var result = await query.ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
-        return (result.Results, result.TotalCount, result.PageCount);
+        // return (result.Results, result.TotalCount, result.PageCount);
+        return default;
     }
 
     public async Task<long> CountAsync(CancellationToken cancellationToken)

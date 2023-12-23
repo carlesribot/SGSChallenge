@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.MongoDB.Products;
+﻿namespace Infrastructure.DTO;
 
 public sealed class ProductDto
 {

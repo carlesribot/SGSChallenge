@@ -1,4 +1,6 @@
 ﻿using BusinessLogic.Mappers;
+using Infrastructure.DTO;
+using Infrastructure.Interfaces;
 using Infrastructure.MongoDB.Products;
 using Microsoft.Extensions.Logging;
 
@@ -21,7 +23,6 @@ public sealed class ProductService
         {
             var result = await _productRepository.GetItemsAsync(searchParams, cancellationToken);
 
-            // Logging
             return (result.Results.MapListOfProducts(), result.TotalCount, result.PageCount);
         }
         catch (Exception ex)

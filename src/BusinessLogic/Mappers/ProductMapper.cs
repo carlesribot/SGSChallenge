@@ -1,5 +1,6 @@
 ﻿using System.Collections.Immutable;
-using Infrastructure.MongoDB.Products;
+using Infrastructure.DTO;
+using Product = Infrastructure.MongoDBDriver.Products.Product;
 
 namespace BusinessLogic.Mappers;
 
@@ -17,7 +18,7 @@ public static class ProductMapper
             Category = product.Category,
             Name = product.Name,
             Description = product.Description,
-            Id = product.ID,
+            Id = product.ProductId,
             ImageUrl = product.Picture,
             IsActive = product.IsActive,
             Price = product.Price,
