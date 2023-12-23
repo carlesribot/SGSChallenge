@@ -1,12 +1,12 @@
 import axios from "axios";
 
-export async function fetchProducts(discountType: string, filteredBy: string, orderBy: string, page: string, onSetValues: (totalCount: number, pageCount: number) => void): Promise<any> {
+export async function fetchProducts(discountType: string, filteredBy: string, orderBy: string, page: string, pageSize: string, onSetValues: (totalCount: number, pageCount: number) => void): Promise<any> {
   const queryParams = new URLSearchParams({
-    PageNumber: page,
-    PageSize: 50,
+    pageNumber: page,
+    pageSize: pageSize,
     discount: discountType,
     filteredBy: filteredBy,
-    OrderBy: orderBy
+    orderBy: orderBy
   });
 
   const apiUrl = `http://localhost:5001/api/search?${queryParams.toString()}`;

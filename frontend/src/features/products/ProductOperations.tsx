@@ -1,4 +1,5 @@
 import { Filter } from "../../ui/Filter";
+import PageSize from "../../ui/PageSize";
 import SortBy from "../../ui/SortBy";
 import TableOperations from "../../ui/TableOperations";
 
@@ -23,6 +24,16 @@ export const ProductTableOperations = () => {
           { value: "price-desc", label: "Sort by price (high first)" },
           { value: "category-asc", label: "Sort by category (A-Z)" },
           { value: "category-desc", label: "Sort by category (Z-A)" },
+        ]}
+      />
+
+      <PageSize
+        options={[
+          { value: "5", label: "Page Size: 5" },
+          { value: "10", label: "Page Size: 10" },
+          { value: "20", label: "Page Size: 20" },
+          { value: "50", label: "Page Size: 50" },
+          { value: "100", label: "Page Size: 100" },
         ]}
       />
     </TableOperations>

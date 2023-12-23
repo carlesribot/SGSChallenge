@@ -14,6 +14,7 @@ export const Products = () => {
   const filteredBy = searchParams.get("filteredBy") || "all";
   const orderBy = searchParams.get("orderBy") || "name-asc";
   const page = searchParams.get("page") || "1";
+  const pageSize = searchParams.get("pageSize") || "5";
 
   const callback = (totalCount: number, pageCount: number) => {
     onSetValues(totalCount, pageCount);
@@ -24,9 +25,16 @@ export const Products = () => {
     error,
     isLoading,
   } = useQuery({
-    queryKey: ["product", discountType, filteredBy, orderBy, page],
+    queryKey: ["product", discountType, filteredBy, orderBy, page, pageSize],
     queryFn: () =>
-      fetchProducts(discountType, filteredBy, orderBy, page, callback),
+      fetchProducts(
+        discountType,
+        filteredBy,
+        orderBy,
+        page,
+        pageSize,
+        callback
+      ),
   });
 
   if (isLoading) return <Spinner />;

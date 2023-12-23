@@ -4,13 +4,19 @@ import styled from "styled-components";
 
 export const PAGE_SIZE = 50;
 
-export const Pagination = ({ count }: { count: number }) => {
+export const Pagination = ({
+  count,
+  pageSize,
+}: {
+  count: number;
+  pageSize: number;
+}) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = !searchParams.get("page")
     ? 1
     : Number(searchParams.get("page"));
 
-  const pageCount = Math.ceil(count / PAGE_SIZE);
+  const pageCount = Math.ceil(count / pageSize);
 
   function nextPage() {
     const next = currentPage === pageCount ? currentPage : currentPage + 1;
@@ -31,9 +37,9 @@ export const Pagination = ({ count }: { count: number }) => {
   return (
     <StyledPagination>
       <P>
-        Showing <span>{(currentPage - 1) * PAGE_SIZE + 1}</span> to{" "}
+        Showing <span>{(currentPage - 1) * pageSize + 1}</span> to{" "}
         <span>
-          {currentPage === pageCount ? count : currentPage * PAGE_SIZE}
+          {currentPage === pageCount ? count : currentPage * pageSize}
         </span>{" "}
         of <span>{count}</span> results
       </P>
