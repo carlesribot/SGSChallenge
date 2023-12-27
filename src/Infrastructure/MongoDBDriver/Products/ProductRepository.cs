@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Interfaces;
+using Infrastructure.MongoDB;
 using Infrastructure.MongoDB.Products;
 using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
@@ -14,13 +15,14 @@ public sealed class ProductRepositoryMongoDriver : IProductRepository
 
     public ProductRepositoryMongoDriver(MongoDbService cosmosDbService, ILogger<ProductRepositoryMongoDriver> logger)
     {
-        if (!cosmosDbService.CollectionExistsAsync(CollectionName).Result)
+        if (!cosmosDbService.CollectionExists(CollectionName))
         {
             logger.LogInformation($"{CollectionName} collection does not exist. Creating it");
-            // TODO: Adding missing collection
+            cosmosDbService.GetMongoDatabase().CreateCollection(CollectionName);
         }
 
         _productCollection = cosmosDbService.GetMongoDatabase().GetCollection<Product>(CollectionName);
+        _productCollection.SeedData(50000, CancellationToken.None).GetAwaiter().GetResult();
     }
 
     public async Task<(IReadOnlyCollection<Product> Results, long TotalCount, int PageCount)> GetItemsAsync(SearchParams searchParams, CancellationToken cancellationToken = default)

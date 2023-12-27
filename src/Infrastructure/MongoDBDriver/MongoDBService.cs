@@ -22,10 +22,10 @@ public sealed class MongoDbService
         return MongoClient.GetDatabase(_options.DatabaseName);
     }
 
-    public async Task<bool> CollectionExistsAsync(string collectionName)
+    public bool CollectionExists(string collectionName)
     {
         var filter = new BsonDocument("name", collectionName);
-        var collections = await GetMongoDatabase().ListCollectionsAsync(new ListCollectionsOptions { Filter = filter });
-        return await collections.AnyAsync();
+        var collection = GetMongoDatabase().ListCollections(new ListCollectionsOptions { Filter = filter });
+        return collection.Any();
     }
 }

@@ -1,9 +1,7 @@
 using BusinessLogic.Products;
 using Infrastructure.Interfaces;
-using Infrastructure.MongoDB.Data;
 using Infrastructure.MongoDBDriver;
 using Infrastructure.MongoDBDriver.Products;
-using Polly;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,12 +19,12 @@ app.UseExceptionHandler("/error");
 app.UseAuthorization();
 
 app.MapControllers();
-app.Lifetime.ApplicationStarted.Register(async () =>
-{
-    await Policy.Handle<TimeoutException>()
-        .WaitAndRetryAsync(5, retryAttempt => TimeSpan.FromSeconds(10))
-        .ExecuteAndCaptureAsync(async () => await DbInitializer.InitDb());
-});
+//app.Lifetime.ApplicationStarted.Register(async () =>
+//{
+//    await Policy.Handle<TimeoutException>()
+//        .WaitAndRetryAsync(5, retryAttempt => TimeSpan.FromSeconds(10))
+//        .ExecuteAndCaptureAsync(async () => await DbInitializer.InitDb());
+//});
 
 app.UseCors(o => o
     .AllowAnyHeader()

@@ -6,6 +6,13 @@ namespace Infrastructure.MongoDB.Data;
 
 public sealed class DbInitializer
 {
+    static decimal GenerateRandomPrice(Random rand, decimal min, decimal max) =>
+        min + (decimal)(rand.NextDouble() * (double)(max - min));
+
+    static bool GenerateRandomBoolean(Random rand) =>
+        rand.Next(2) == 0;
+
+
     public static async Task InitDb()
     {
         await DB.InitAsync("searchDB", MongoClientSettings.FromConnectionString("mongodb://root:mongopw@localhost"));
@@ -27,17 +34,15 @@ public sealed class DbInitializer
             var data = new List<Product>();
             for (int i = 0; i < records; i++)
             {
-                int randomNumber = rand.Next(2);
-
                 var product = new Product
                 {
-                    Name = $"Product{i + 1}",
-                    Description = "Ea cillum culpa esse ad nisi. Quis adipisicing fugiat amet dolore duis ad velit nisi reprehenderit id voluptate in anim exercitation. Fugiat id nisi velit in laboris aute reprehenderit nulla duis pariatur elit labore do. Tempor adipisicing non laboris reprehenderit elit dolore. Pariatur eu excepteur dolore qui sint magna consequat Lorem velit nisi officia aliqua.",
-                    IsActive = randomNumber == 0,
+                    Name = Faker.Company.Name(),
+                    Description = String.Join(" ", Faker.Lorem.Sentences(3)),
+                    IsActive = GenerateRandomBoolean(rand),
                     Picture = $"https://picsum.photos/700/700?random={i + 1}",
-                    Price = rand.Next(0, 1000),
+                    Price = GenerateRandomPrice(rand, 0, 200),
                     Stock = rand.Next(1, 100),
-                    Category = $"{i}"
+                    Category = Faker.Name.First()
                 };
 
                 data.Add(product);

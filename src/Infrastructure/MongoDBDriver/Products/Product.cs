@@ -8,6 +8,7 @@ namespace Infrastructure.MongoDBDriver.Products
         [BsonElement("_id")]
         public ObjectId Id { get; set; }
 
+        [BsonElement("product_id")]
         public string ProductId { get; set; }
 
         public string Name { get; set; }

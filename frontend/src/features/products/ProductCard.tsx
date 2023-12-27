@@ -22,7 +22,7 @@ export const ProductCard: React.FC<Product> = ({ product }: Props) => {
       <ProductName>{product.name}</ProductName>
       <ProductStatus>{product.description}</ProductStatus>
       <ProductDescription>Category: {product.category}</ProductDescription>
-      <ProductDetails>Price: {product.price}€</ProductDetails>
+      <ProductDetails>Price: {product.price.toFixed(2)}€</ProductDetails>
       <ProductDetails>Stock: {product.stock}</ProductDetails>
       <ProductStatus>{product.isActive ? "Active" : "Inactive"}</ProductStatus>
     </CardContainer>
