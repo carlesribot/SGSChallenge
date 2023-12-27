@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-type Product = {
+export type Product = {
   id: number;
   name: string;
   description: string;

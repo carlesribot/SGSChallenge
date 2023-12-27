@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 
 import { fetchProducts } from "../../services/apiProducts";
 import Spinner from "../../ui/Spinner";
-import { ProductCard } from "./ProductCard";
+import { Product, ProductCard } from "./ProductCard";
 import { useProductsContext } from "./ProductsProvider";
 
 export const Products = () => {
@@ -17,7 +17,7 @@ export const Products = () => {
   const orderBy = searchParams.get("orderBy") || "name-asc";
   const page = searchParams.get("page") || 1;
   const pageSize = searchParams.get("pageSize") || "5";
-  const pageCount = Math.ceil(productsContext.totalCount / pageSize);
+  const pageCount = Math.ceil(productsContext.totalCount / +pageSize);
 
   const callback = (totalCount: number, pageCount: number) => {
     onSetValues(totalCount, pageCount);
@@ -40,7 +40,7 @@ export const Products = () => {
       ),
   });
 
-  if (page < pageCount)
+  if (+page < pageCount)
     queryClient.prefetchQuery({
       queryKey: ["product", discountType, filteredBy, orderBy, page, pageSize],
       queryFn: () =>
@@ -54,7 +54,7 @@ export const Products = () => {
         ),
     });
 
-  if (page > 1)
+  if (+page > 1)
     queryClient.prefetchQuery({
       queryKey: ["product", discountType, filteredBy, orderBy, page, pageSize],
       queryFn: () =>
@@ -77,7 +77,7 @@ export const Products = () => {
   return (
     <>
       {products &&
-        products.results.map((product: any) => (
+        products.results.map((product: Product) => (
           <ProductCard product={product} key={product.id} />
         ))}
     </>

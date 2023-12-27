@@ -13,7 +13,7 @@ export const Header = () => {
     <StyledHeader>
       <p>SGS Prueba Tecnica</p>
       <ProductTableOperations />
-      <Pagination count={productsContext.totalCount} pageSize={pageSize} />
+      <Pagination count={productsContext.totalCount} pageSize={+pageSize} />
     </StyledHeader>
   );
 };

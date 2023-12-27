@@ -1,16 +1,26 @@
 import { useSearchParams } from "react-router-dom";
 import styled, { css } from "styled-components";
 
-export const Filter = ({ filterField, options }) => {
+export type FilterOptions = {
+  value: string;
+  label: string;
+};
+
+export type FilterProps = {
+  options: FilterOptions[];
+  filterField: string;
+};
+
+export const Filter: React.FC<FilterProps> = ({ filterField, options }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentFilter = searchParams.get(filterField) || options.at(0).value;
 
-  function handleClick(value: string) {
+  const handleClick = (value: string) => {
     searchParams.set(filterField, value);
-    if (searchParams.get("page")) searchParams.set("page", 1);
+    if (searchParams.get("page")) searchParams.set("page", "1");
 
     setSearchParams(searchParams);
-  }
+  };
 
   return (
     <StyledFilter>
