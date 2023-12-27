@@ -14,8 +14,6 @@ public sealed class SearchParams
 
     public string OrderBy { get; set; } = string.Empty;
 
-    public int OrderDirection { get; set; }
-
     public string FilteredBy { get; set; } = string.Empty;
 
     public string Category { get; set; } = string.Empty;

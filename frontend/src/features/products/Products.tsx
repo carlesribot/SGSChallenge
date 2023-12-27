@@ -12,6 +12,7 @@ export const Products = () => {
   const [searchParams] = useSearchParams();
   const { onSetValues } = useProductsContext();
 
+  const search = searchParams.get("search") || "";
   const discountType = searchParams.get("discount") || "all";
   const filteredBy = searchParams.get("filteredBy") || "all";
   const orderBy = searchParams.get("orderBy") || "name-asc";
@@ -28,9 +29,18 @@ export const Products = () => {
     error,
     isLoading,
   } = useQuery({
-    queryKey: ["product", discountType, filteredBy, orderBy, page, pageSize],
+    queryKey: [
+      "product",
+      search,
+      discountType,
+      filteredBy,
+      orderBy,
+      page,
+      pageSize,
+    ],
     queryFn: () =>
       fetchProducts(
+        search,
         discountType,
         filteredBy,
         orderBy,
@@ -42,9 +52,18 @@ export const Products = () => {
 
   if (+page < pageCount)
     queryClient.prefetchQuery({
-      queryKey: ["product", discountType, filteredBy, orderBy, page, pageSize],
+      queryKey: [
+        "product",
+        search,
+        discountType,
+        filteredBy,
+        orderBy,
+        page,
+        pageSize,
+      ],
       queryFn: () =>
         fetchProducts(
+          search,
           discountType,
           filteredBy,
           orderBy,
@@ -56,9 +75,18 @@ export const Products = () => {
 
   if (+page > 1)
     queryClient.prefetchQuery({
-      queryKey: ["product", discountType, filteredBy, orderBy, page, pageSize],
+      queryKey: [
+        "product",
+        search,
+        discountType,
+        filteredBy,
+        orderBy,
+        page,
+        pageSize,
+      ],
       queryFn: () =>
         fetchProducts(
+          search,
           discountType,
           filteredBy,
           orderBy,

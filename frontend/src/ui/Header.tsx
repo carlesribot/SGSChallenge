@@ -3,6 +3,7 @@ import { ProductTableOperations } from "../features/products/ProductOperations";
 import { Pagination } from "./Pagination";
 import { useProductsContext } from "../features/products/ProductsProvider";
 import { useSearchParams } from "react-router-dom";
+import { Search } from "./Search";
 
 export const Header = () => {
   const productsContext = useProductsContext();
@@ -12,6 +13,7 @@ export const Header = () => {
   return (
     <StyledHeader>
       <p>SGS Prueba Tecnica</p>
+      <Search />
       <ProductTableOperations />
       <Pagination count={productsContext.totalCount} pageSize={+pageSize} />
     </StyledHeader>

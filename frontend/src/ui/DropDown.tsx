@@ -15,12 +15,5 @@ export const DropDown: React.FC<DropDownProps> = ({ options, id }) => {
     setSearchParams(searchParams);
   };
 
-  return (
-    <Select
-      options={options}
-      type="white"
-      value={pageSize}
-      onChange={handleChange}
-    />
-  );
+  return <Select options={options} value={pageSize} onChange={handleChange} />;
 };
